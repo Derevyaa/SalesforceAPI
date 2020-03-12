@@ -43,9 +43,9 @@ fi
         ls
         date
         newman run API_Salesforce_Test.postman_collection.json -e API_Salesforce_Test.postman_environment.json -r htmlextra
-'''
+'''}
         timeout(time: 1, unit: 'MINUTES')
-                 sh 'echo "Hello 2"'
+      {             sh 'echo "Hello 2"'
    sh '''pwd
         ls
         date

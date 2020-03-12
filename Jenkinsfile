@@ -39,16 +39,24 @@ fi
       steps {
         sh '''pwd
         ls
+        date
         newman run API_Salesforce_Test.postman_collection.json -e API_Salesforce_Test.postman_environment.json -r htmlextra
 '''
+        timeout(time: 1, unit: 'MINUTES')
+   sh '''pwd
+        ls
+        date
+        newman run API_Salesforce_Test.postman_collection.json -e API_Salesforce_Test.postman_environment.json -r htmlextra
+'''     
       }
+       
       
     }
   }
   post {
         always {
             archiveArtifacts artifacts: 'newman/*.html', fingerprint: true
-            timeout(time: 1, unit: 'MINUTES')
+           
         }
     }
 }

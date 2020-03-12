@@ -1,6 +1,5 @@
 pipeline {
   agent any
- 
   stages {
     stage('Check installations') {
       steps {
@@ -37,29 +36,22 @@ fi
     }
     stage('Test') {
       steps {
-         sh 'echo "Hello 1"'
-        sh '''
-        pwd
-        ls
-        date
+        sh 'echo "Hello 2"'
+        sh '''        date
         newman run API_Salesforce_Test.postman_collection.json -e API_Salesforce_Test.postman_environment.json -r htmlextra
-'''}
-        
-      {             sh 'echo "Hello 2"'
-   sh '''pwd
-        ls
-        date
+'''
+        sleep(unit: 'MINUTES', time: 1)
+        sh '''   date
         newman run API_Salesforce_Test.postman_collection.json -e API_Salesforce_Test.postman_environment.json -r htmlextra
-'''     
+'''
       }
-       
-      
     }
   }
   post {
-        always {
-            archiveArtifacts artifacts: 'newman/*.html', fingerprint: true
-           
-        }
+    always {
+      archiveArtifacts(artifacts: 'newman/*.html', fingerprint: true)
+
     }
+
+  }
 }

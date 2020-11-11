@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    
+    parameters {
+        choice(
+            name: 'CHOICE',
+            choices: ['true', 'false'],
+            description: ''
+        )
+    }
+
+    environment {
+        IS_BOOLEAN = "${params.CHOICE}"
+    }
+
+    stages {
+        stage("Env Variables") {
+            steps {
+                script {
+                    if (env.IS_BOOLEAN=="true") {
+                        echo "${params.CHOICE}"
+                    } else {echo "lalalalalaal"}
+                }
+            }
+        }
+    }
+}
